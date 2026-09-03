@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="110" viewBox="0 0 900 110">
+  <g fill="none" stroke="#c8d7c9" stroke-width="2" stroke-linecap="round">
+    <line x1="40" y1="55" x2="415" y2="55"/>
+    <line x1="485" y1="55" x2="860" y2="55"/>
+  </g>
+
+  <!-- Center leaf / sprout -->
+  <g fill="#2d8a48">
+    <path d="M447 49
+             C438 47 432 41 431 34
+             C439 34 446 37 449 43
+             C451 37 457 34 465 34
+             C464 42 458 48 451 50
+             L451 59
+             L447 59 Z"/>
+    <path d="M449 49
+             C446 44 442 40 436 38
+             C441 37 447 40 450 44
+             C452 40 457 37 462 37
+             C459 43 455 47 451 50 Z"
+          fill="#3b9b54"/>
+  </g>
+</svg>
