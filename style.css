@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin-top: 4%;
+    background-image: url('Assets/Background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-para {
+    color: rgba(0, 0, 0, 0.795);
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.container {
+    margin: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    justify-content: center;
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.76);
+    width: 280px;
+    height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.box>*:not(.login-btn) {
+    padding-bottom: 10px;
+}
+
+.Farmer {
+    color: rgb(0, 95, 0);
+}
+
+.box p:first-of-type {
+    padding: 0px 30px 10px 30px;
+    color: rgb(49, 49, 49);
+    font-weight: bold;
+}
+
+.list-detail-farmer,.list-detail-buyer,.list-detail-admin {
+    padding-bottom: 20px;
+    list-style: none;
+}
+.list-detail-farmer li {
+  background-image: url('Assets/tick-circle-green.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 16px 16px;
+  padding-left: 25px; 
+}
+.list-detail-buyer li {
+  background-image: url('Assets/tick-circle-blue.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 16px 16px;
+  padding-left: 25px; 
+}
+.list-detail-admin li {
+  background-image: url('Assets/tick-circle-orange.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 16px 16px;
+  padding-left: 25px; 
+}
+
+
+.login-btn {
+    width: 250px;
+    height: 50px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.login-btn-buyer {
+    background-color: rgb(13 50 88);
+}
+
+.login-btn-buyer:hover {
+    background-color: rgb(8, 31, 54);
+    cursor: pointer;
+    transition: ease-in-out;
+}
+
+.login-btn-admin {
+    background-color: rgb(255, 115, 0);
+    cursor: pointer;
+    transition: ease-in-out;
+}
+
+.login-btn-admin:hover {
+    background-color: rgb(185, 83, 0);
+    cursor: pointer;
+    transition: ease-in-out;
+}
+
+.login-btn-farmer:hover {
+    cursor: pointer;
+    transition: ease-in-out;
+    background-color: rgb(0, 78, 0);
+}
+
+.register {
+    padding-top: 10px;
+}
+
+.register-btn {
+    text-decoration: none;
+    color: green;
+    font-weight: bold;
+}
+
+.register-btn:hover {
+    color: rgb(0, 78, 0);
+}
+
+.register-btn-buyer {
+    color: rgb(13 50 88);
+}
+
+.register-btn-buyer:hover {
+    color: rgb(8, 31, 54);
+}
