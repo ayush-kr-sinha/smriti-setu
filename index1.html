@@ -1,0 +1,1044 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanSetu - Farm to Market. Direct & Fair.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0B4734',     // Dark green for navbar
+                        secondary: '#0F8B5A',   // Bright green for buttons/accents
+                        lightGreen: '#EAF4EE',  // Very light green backgrounds
+                        textDark: '#1F2937',    
+                        textMuted: '#6B7280'
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAF9] text-textDark font-sans overflow-x-hidden">
+
+    <header class="bg-white border-b border-gray-100">
+        <div class="max-w-[1536px] mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold leading-tight text-primary">KisanSetu</h1>
+                            <p class="text-[10px] text-textMuted font-medium">Farm to Market. Direct & Fair.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden lg:flex items-center gap-2 pl-6 border-l border-gray-200 cursor-pointer">
+                        <i class="fa-solid fa-location-dot text-secondary text-sm"></i>
+                        <div class="flex flex-col">
+                            <span class="text-xs text-textMuted leading-none">Deliver to</span>
+                            <span class="text-sm font-semibold flex items-center gap-1">Lucknow, UP <i class="fa-solid fa-chevron-down text-[10px]"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="relative flex items-center justify-center w-10 h-10 md:hidden">
+                    <i class="fa-solid fa-cart-shopping text-xl text-gray-700 hover:text-secondary transition-colors"></i>
+                    <span class="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">2</span>
+                </a>
+            </div>
+
+            <div class="w-full md:flex-1 max-w-2xl md:mx-4">
+                <div class="flex items-center w-full bg-white border border-gray-300 rounded-md overflow-hidden focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all">
+                    <input type="text" placeholder="Search for grains, pulses, oilseeds..." class="w-full px-4 py-2.5 text-sm outline-none text-gray-700">
+                    <button class="bg-secondary text-white px-5 sm:px-6 py-2.5 hover:bg-opacity-90 transition-colors shrink-0">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
+                        <i class="fa-solid fa-phone text-secondary text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">1800-123-4567</p>
+                        <p class="text-[10px] text-textMuted">Mon - Sat (9AM - 6PM)</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-secondary transition-colors pl-6 border-l border-gray-200 shrink-0">
+                    <i class="fa-regular fa-user"></i> Login / Register
+                </a>
+                
+                <a href="#" class="relative flex items-center justify-center w-10 h-10 ml-2">
+                    <i class="fa-solid fa-cart-shopping text-xl text-gray-700 hover:text-secondary transition-colors"></i>
+                    <span class="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">2</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-primary text-white sticky top-0 z-50 overflow-hidden">
+        <div class="max-w-[1536px] mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center w-full lg:w-auto overflow-x-auto hide-scrollbar">
+                <button class="flex items-center gap-2 py-3 px-4 hover:bg-white/10 transition-colors border-r border-white/10 font-medium text-sm shrink-0">
+                    <i class="fa-solid fa-bars"></i> All Categories
+                </button>
+                <div class="flex items-center shrink-0">
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium text-yellow-400 border-b-2 border-yellow-400 whitespace-nowrap">Home</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap">Shop</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap">Sell Your Produce</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden sm:block">Orders</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden sm:block">About Us</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden md:block">Support</a>
+                </div>
+            </div>
+            
+            <a href="#" class="hidden lg:flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-1.5 px-4 rounded-full text-sm font-medium border border-white/20 shrink-0 ml-4">
+                <i class="fa-solid fa-leaf text-secondary"></i> For Farmers
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-[1536px] mx-auto px-4 py-6 flex flex-col xl:flex-row gap-6 lg:gap-8">
+        
+        <div class="w-full xl:w-[73%] flex flex-col gap-8">
+            
+            <div class="relative w-full min-h-[420px] md:h-[380px] bg-lightGreen rounded-2xl overflow-hidden shadow-sm flex flex-col justify-center">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center md:bg-right bg-no-repeat"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:from-[#F4F9F6] md:via-[#F4F9F6]/95 to-white/40 md:to-transparent"></div>
+
+                <div class="relative z-10 p-5 md:p-8 flex flex-col justify-center w-full md:w-[65%] lg:w-[60%]">
+                    <h2 class="text-3xl sm:text-4xl md:text-[42px] font-bold text-textDark leading-tight mb-3">
+                        Fresh Produce.<br>
+                        Direct from <span class="text-secondary">Farmers.</span>
+                    </h2>
+                    <p class="text-gray-700 text-sm md:text-base mb-6 md:mb-8 max-w-sm">
+                        hye people, Abhinav Sharma here, Attack on titan and naruto are my fav anime series, jjk bhi accha haiii though, tum log bhi dekhnaa, demon slayer bhi mst hai.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 md:mb-10">
+                        <button class="bg-secondary text-white px-6 py-2.5 md:py-3 rounded-md font-semibold text-sm hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-cart-shopping"></i> Shop Now
+                        </button>
+                        <button class="bg-white text-secondary border border-secondary px-6 py-2.5 md:py-3 rounded-md font-semibold text-sm hover:bg-lightGreen transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-leaf"></i> Sell Your Produce
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:flex md:items-center md:gap-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-check text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Direct from Farmers</span>
+                                <span class="text-[10px] text-gray-500">No Middlemen</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-regular fa-circle-check text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Quality Assured</span>
+                                <span class="text-[10px] text-gray-500">100% Verified</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-handshake-angle text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Fair Prices</span>
+                                <span class="text-[10px] text-gray-500">Best for Everyone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 bg-white p-4 rounded-xl shadow-soft w-[280px] z-20 flex-col">
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">This Week's Best Deal</span>
+                    <h3 class="font-bold text-gray-800 text-lg leading-tight mb-1">1121 Basmati Rice (Sella) - 40kg Sack</h3>
+                    
+                    <div class="flex items-end justify-between mt-2">
+                        <div>
+                            <span class="text-xl font-bold text-primary">₹1,650</span> <span class="text-xs text-gray-500">/ Sack</span><br>
+                            <span class="text-xs text-gray-400 line-through">₹1,950</span>
+                        </div>
+                        <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Sack" alt="Rice Sack" class="w-16 h-16 object-contain mix-blend-multiply">
+                    </div>
+                    <button class="w-full bg-secondary text-white py-2 rounded mt-4 text-sm font-semibold hover:bg-primary transition-colors">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <section>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Shop by Category</h3>
+                    <a href="#" class="text-sm font-semibold text-secondary hover:underline">View All</a>
+                </div>
+                
+                <div class="flex gap-3 sm:gap-4 overflow-x-auto hide-scrollbar pb-2">
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDF8EE] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌾" alt="Rice" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Rice</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF4E5] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌾" alt="Wheat" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Wheat</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F3F6EB] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/65a30d?text=🫘" alt="Pulses" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Pulses</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF7ED] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/ea580c?text=🌻" alt="Oilseeds" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Oilseeds</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDF4E7] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌿" alt="Millets" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Millets</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF1F2] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/e11d48?text=🌶️" alt="Spices" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Spices</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F8FAFC] rounded-full flex items-center justify-center p-2 border border-gray-100">
+                            <img src="https://placehold.co/40x40/transparent/475569?text=🧊" alt="Sugar" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Sugar</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 rounded-full flex items-center justify-center p-2 text-gray-400">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">More</span>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Popular Commodities</h3>
+                    <a href="#" class="text-sm font-semibold text-secondary hover:underline">View All</a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 relative">
+                    
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="absolute top-2 left-2 bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">
+                            Best Seller
+                        </div>
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Paddy Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Paddy (Raw)</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">40kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,250 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Basmati Rice" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">1121 Basmati Rice</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">40kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,650 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Wheat Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Wheat (Sharbati)</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">50kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,350 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Toor Dal Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Toor Dal</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">30kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹2,100 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Soybean Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Soybean</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">50kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,600 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Moong Dal Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Moong Dal</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">30kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹2,300 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-md text-gray-500 hover:text-primary z-10 hidden xl:flex">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div class="w-full xl:w-[27%] grid grid-cols-1 md:grid-cols-2 xl:flex xl:flex-col gap-6">
+            
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm md:col-span-1">
+                <h3 class="text-[15px] font-bold text-gray-800 mb-5">Why Choose KisanSetu?</h3>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Direct from Farmers</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">No brokers, no extra charges</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-box-open text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Sack Based Trading</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Buy in standard sacks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-shield-halved text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Quality & Purity</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Lab tested & quality assured</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-indian-rupee-sign text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Transparent Pricing</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Fair price for farmers & buyers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-truck-fast text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Reliable Delivery</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Safe & on-time delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6 md:col-span-1 xl:contents">
+                
+                <div class="bg-[#E9F3ED] p-5 rounded-2xl border border-green-100 relative overflow-hidden h-fit">
+                    <div class="relative z-10 w-[70%] md:w-[60%]">
+                        <h3 class="text-[15px] font-bold text-primary mb-2">Are you a Farmer?</h3>
+                        <p class="text-xs text-gray-600 mb-4 leading-relaxed">Sell your produce to thousands of buyers across India.</p>
+                        <button class="bg-white text-secondary px-4 py-2 rounded text-xs font-bold border border-secondary flex items-center gap-2 hover:bg-secondary hover:text-white transition-colors w-fit">
+                            Join as Farmer <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 w-[120px] h-[120px] opacity-90 mix-blend-multiply">
+                        <img src="https://placehold.co/150x150/transparent/0B4734?text=Farmer+Icon" alt="Farmer" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm relative h-fit flex-grow">
+                    <h3 class="text-[15px] font-bold text-gray-800 mb-1">How it works</h3>
+                    <p class="text-[10px] text-gray-500 mb-5">Simple steps to buy</p>
+                    
+                    <div class="flex flex-col gap-4 relative mb-6">
+                        <div class="absolute left-[11px] top-4 bottom-4 w-px bg-green-100 z-0"></div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">1</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">Choose Product</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Select the produce and sack quantity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">2</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">Place Order</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Make payment securely online</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">3</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">We Deliver</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Fast and safe delivery to your location</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-between bg-white rounded-full p-1.5 pl-4 border border-gray-100 shadow-sm">
+                        <span class="text-xs font-semibold text-gray-700">Need Help? Chat with us</span>
+                        <a href="#" class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="max-w-[1536px] mx-auto px-4 pb-10">
+        <div class="bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-users text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">10,000+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Verified Farmers</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-regular fa-face-smile text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">50,000+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Happy Customers</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-truck text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">500+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Tons Delivered</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-location-dot text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">25+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">States Covered</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanSetu - Farm to Market. Direct & Fair.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0B4734',     // Dark green for navbar
+                        secondary: '#0F8B5A',   // Bright green for buttons/accents
+                        lightGreen: '#EAF4EE',  // Very light green backgrounds
+                        textDark: '#1F2937',    
+                        textMuted: '#6B7280'
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAF9] text-textDark font-sans overflow-x-hidden">
+
+    <header class="bg-white border-b border-gray-100">
+        <div class="max-w-[1536px] mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold leading-tight text-primary">KisanSetu</h1>
+                            <p class="text-[10px] text-textMuted font-medium">Farm to Market. Direct & Fair.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden lg:flex items-center gap-2 pl-6 border-l border-gray-200 cursor-pointer">
+                        <i class="fa-solid fa-location-dot text-secondary text-sm"></i>
+                        <div class="flex flex-col">
+                            <span class="text-xs text-textMuted leading-none">Deliver to</span>
+                            <span class="text-sm font-semibold flex items-center gap-1">Lucknow, UP <i class="fa-solid fa-chevron-down text-[10px]"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="relative flex items-center justify-center w-10 h-10 md:hidden">
+                    <i class="fa-solid fa-cart-shopping text-xl text-gray-700 hover:text-secondary transition-colors"></i>
+                    <span class="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">2</span>
+                </a>
+            </div>
+
+            <div class="w-full md:flex-1 max-w-2xl md:mx-4">
+                <div class="flex items-center w-full bg-white border border-gray-300 rounded-md overflow-hidden focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all">
+                    <input type="text" placeholder="Search for grains, pulses, oilseeds..." class="w-full px-4 py-2.5 text-sm outline-none text-gray-700">
+                    <button class="bg-secondary text-white px-5 sm:px-6 py-2.5 hover:bg-opacity-90 transition-colors shrink-0">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
+                        <i class="fa-solid fa-phone text-secondary text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">1800-123-4567</p>
+                        <p class="text-[10px] text-textMuted">Mon - Sat (9AM - 6PM)</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-secondary transition-colors pl-6 border-l border-gray-200 shrink-0">
+                    <i class="fa-regular fa-user"></i> Login / Register
+                </a>
+                
+                <a href="#" class="relative flex items-center justify-center w-10 h-10 ml-2">
+                    <i class="fa-solid fa-cart-shopping text-xl text-gray-700 hover:text-secondary transition-colors"></i>
+                    <span class="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">2</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-primary text-white sticky top-0 z-50 overflow-hidden">
+        <div class="max-w-[1536px] mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center w-full lg:w-auto overflow-x-auto hide-scrollbar">
+                <button class="flex items-center gap-2 py-3 px-4 hover:bg-white/10 transition-colors border-r border-white/10 font-medium text-sm shrink-0">
+                    <i class="fa-solid fa-bars"></i> All Categories
+                </button>
+                <div class="flex items-center shrink-0">
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium text-yellow-400 border-b-2 border-yellow-400 whitespace-nowrap">Home</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap">Shop</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap">Sell Your Produce</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden sm:block">Orders</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden sm:block">About Us</a>
+                    <a href="#" class="py-3 px-4 sm:px-6 text-sm font-medium hover:text-yellow-400 transition-colors whitespace-nowrap hidden md:block">Support</a>
+                </div>
+            </div>
+            
+            <a href="#" class="hidden lg:flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-1.5 px-4 rounded-full text-sm font-medium border border-white/20 shrink-0 ml-4">
+                <i class="fa-solid fa-leaf text-secondary"></i> For Farmers
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-[1536px] mx-auto px-4 py-6 flex flex-col xl:flex-row gap-6 lg:gap-8">
+        
+        <div class="w-full xl:w-[73%] flex flex-col gap-8">
+            
+            <div class="relative w-full min-h-[420px] md:h-[380px] bg-lightGreen rounded-2xl overflow-hidden shadow-sm flex flex-col justify-center">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center md:bg-right bg-no-repeat"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:from-[#F4F9F6] md:via-[#F4F9F6]/95 to-white/40 md:to-transparent"></div>
+
+                <div class="relative z-10 p-5 md:p-8 flex flex-col justify-center w-full md:w-[65%] lg:w-[60%]">
+                    <h2 class="text-3xl sm:text-4xl md:text-[42px] font-bold text-textDark leading-tight mb-3">
+                        Fresh Produce.<br>
+                        Direct from <span class="text-secondary">Farmers.</span>
+                    </h2>
+                    <p class="text-gray-700 text-sm md:text-base mb-6 md:mb-8 max-w-sm">
+                        hye people, Abhinav Sharma here, Attack on titan and naruto are my fav anime series, jjk bhi accha haiii though, tum log bhi dekhnaa, demon slayer bhi mst hai.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 md:mb-10">
+                        <button class="bg-secondary text-white px-6 py-2.5 md:py-3 rounded-md font-semibold text-sm hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-cart-shopping"></i> Shop Now
+                        </button>
+                        <button class="bg-white text-secondary border border-secondary px-6 py-2.5 md:py-3 rounded-md font-semibold text-sm hover:bg-lightGreen transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-leaf"></i> Sell Your Produce
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:flex md:items-center md:gap-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-check text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Direct from Farmers</span>
+                                <span class="text-[10px] text-gray-500">No Middlemen</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-regular fa-circle-check text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Quality Assured</span>
+                                <span class="text-[10px] text-gray-500">100% Verified</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-handshake-angle text-secondary text-lg"></i>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Fair Prices</span>
+                                <span class="text-[10px] text-gray-500">Best for Everyone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 bg-white p-4 rounded-xl shadow-soft w-[280px] z-20 flex-col">
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">This Week's Best Deal</span>
+                    <h3 class="font-bold text-gray-800 text-lg leading-tight mb-1">1121 Basmati Rice (Sella) - 40kg Sack</h3>
+                    
+                    <div class="flex items-end justify-between mt-2">
+                        <div>
+                            <span class="text-xl font-bold text-primary">₹1,650</span> <span class="text-xs text-gray-500">/ Sack</span><br>
+                            <span class="text-xs text-gray-400 line-through">₹1,950</span>
+                        </div>
+                        <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Sack" alt="Rice Sack" class="w-16 h-16 object-contain mix-blend-multiply">
+                    </div>
+                    <button class="w-full bg-secondary text-white py-2 rounded mt-4 text-sm font-semibold hover:bg-primary transition-colors">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <section>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Shop by Category</h3>
+                    <a href="#" class="text-sm font-semibold text-secondary hover:underline">View All</a>
+                </div>
+                
+                <div class="flex gap-3 sm:gap-4 overflow-x-auto hide-scrollbar pb-2">
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDF8EE] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌾" alt="Rice" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Rice</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF4E5] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌾" alt="Wheat" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Wheat</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F3F6EB] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/65a30d?text=🫘" alt="Pulses" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Pulses</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF7ED] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/ea580c?text=🌻" alt="Oilseeds" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Oilseeds</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDF4E7] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/d97706?text=🌿" alt="Millets" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Millets</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFF1F2] rounded-full flex items-center justify-center p-2">
+                            <img src="https://placehold.co/40x40/transparent/e11d48?text=🌶️" alt="Spices" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Spices</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F8FAFC] rounded-full flex items-center justify-center p-2 border border-gray-100">
+                            <img src="https://placehold.co/40x40/transparent/475569?text=🧊" alt="Sugar" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">Sugar</span>
+                    </a>
+                    <a href="#" class="min-w-[85px] sm:min-w-[100px] flex flex-col items-center gap-2 sm:gap-3 bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm hover:border-secondary hover:shadow-md transition-all">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 rounded-full flex items-center justify-center p-2 text-gray-400">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-700">More</span>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Popular Commodities</h3>
+                    <a href="#" class="text-sm font-semibold text-secondary hover:underline">View All</a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 relative">
+                    
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="absolute top-2 left-2 bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">
+                            Best Seller
+                        </div>
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Paddy Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Paddy (Raw)</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">40kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,250 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Basmati Rice" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">1121 Basmati Rice</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">40kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,650 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Wheat Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Wheat (Sharbati)</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">50kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,350 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Toor Dal Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Toor Dal</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">30kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹2,100 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Soybean Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Soybean</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">50kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹1,600 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-100 p-3 sm:p-4 relative flex flex-col hover:shadow-md transition-shadow">
+                        <div class="h-24 sm:h-32 mb-3 sm:mb-4 flex items-center justify-center bg-[#FAFAFA] rounded-lg p-2">
+                            <img src="https://placehold.co/120x120/transparent/a3a3a3?text=Sack" alt="Moong Dal Sack" class="max-h-full object-contain">
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-gray-800 leading-tight mb-1 truncate">Moong Dal</h4>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">30kg Sack</p>
+                        <div class="mt-auto">
+                            <p class="text-sm sm:text-base font-bold text-gray-800 mb-2 sm:mb-3">₹2,300 <span class="text-[10px] sm:text-xs font-normal text-gray-500">/ Sack</span></p>
+                            <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors py-1.5 sm:py-2 rounded text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-md text-gray-500 hover:text-primary z-10 hidden xl:flex">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div class="w-full xl:w-[27%] grid grid-cols-1 md:grid-cols-2 xl:flex xl:flex-col gap-6">
+            
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm md:col-span-1">
+                <h3 class="text-[15px] font-bold text-gray-800 mb-5">Why Choose KisanSetu?</h3>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Direct from Farmers</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">No brokers, no extra charges</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-box-open text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Sack Based Trading</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Buy in standard sacks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-shield-halved text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Quality & Purity</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Lab tested & quality assured</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-indian-rupee-sign text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Transparent Pricing</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Fair price for farmers & buyers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                            <i class="fa-solid fa-truck-fast text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 leading-tight">Reliable Delivery</h4>
+                            <p class="text-xs text-gray-500 mt-0.5">Safe & on-time delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6 md:col-span-1 xl:contents">
+                
+                <div class="bg-[#E9F3ED] p-5 rounded-2xl border border-green-100 relative overflow-hidden h-fit">
+                    <div class="relative z-10 w-[70%] md:w-[60%]">
+                        <h3 class="text-[15px] font-bold text-primary mb-2">Are you a Farmer?</h3>
+                        <p class="text-xs text-gray-600 mb-4 leading-relaxed">Sell your produce to thousands of buyers across India.</p>
+                        <button class="bg-white text-secondary px-4 py-2 rounded text-xs font-bold border border-secondary flex items-center gap-2 hover:bg-secondary hover:text-white transition-colors w-fit">
+                            Join as Farmer <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 w-[120px] h-[120px] opacity-90 mix-blend-multiply">
+                        <img src="https://placehold.co/150x150/transparent/0B4734?text=Farmer+Icon" alt="Farmer" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm relative h-fit flex-grow">
+                    <h3 class="text-[15px] font-bold text-gray-800 mb-1">How it works</h3>
+                    <p class="text-[10px] text-gray-500 mb-5">Simple steps to buy</p>
+                    
+                    <div class="flex flex-col gap-4 relative mb-6">
+                        <div class="absolute left-[11px] top-4 bottom-4 w-px bg-green-100 z-0"></div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">1</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">Choose Product</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Select the produce and sack quantity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">2</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">Place Order</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Make payment securely online</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3 relative z-10">
+                            <div class="w-6 h-6 rounded-full bg-lightGreen flex items-center justify-center text-secondary text-xs font-bold shrink-0 mt-0.5 border border-white">3</div>
+                            <div>
+                                <h4 class="text-[13px] font-semibold text-gray-800 leading-tight">We Deliver</h4>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Fast and safe delivery to your location</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-between bg-white rounded-full p-1.5 pl-4 border border-gray-100 shadow-sm">
+                        <span class="text-xs font-semibold text-gray-700">Need Help? Chat with us</span>
+                        <a href="#" class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="max-w-[1536px] mx-auto px-4 pb-10">
+        <div class="bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-users text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">10,000+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Verified Farmers</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-regular fa-face-smile text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">50,000+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Happy Customers</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-truck text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">500+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Tons Delivered</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                <div class="w-10 h-10 rounded-full bg-lightGreen flex items-center justify-center text-secondary shrink-0">
+                    <i class="fa-solid fa-location-dot text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 leading-tight">25+</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-medium">States Covered</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+>>>>>>> f32efff87366eb30f2d29479f0bc846c4b448cff
+</html>
