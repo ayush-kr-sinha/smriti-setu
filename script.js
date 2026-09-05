@@ -14,7 +14,7 @@ finalLogin.addEventListener("click", ()=>{
     passwordInputvalue = passwordInput.value
     if (emailInputvalue == "test@gmail.com" && passwordInputvalue==1234) {
         console.log("logged in");
-        window.location.href = "index1.html";
+        window.location.href = "Farmer-Dashboard.html";
     }
     else{
         alert("Please enter correct credentials");
