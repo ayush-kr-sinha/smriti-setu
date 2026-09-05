@@ -20,3 +20,9 @@ finalLogin.addEventListener("click", ()=>{
         alert("Please enter correct credentials");
     }
 })
+
+const cross = document.querySelector(".cross");
+
+cross.addEventListener("click", ()=>{
+    popupBlack.style.display = "none";
+})
