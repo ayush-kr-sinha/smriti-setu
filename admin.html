@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanSetu Admin Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0e4a32',   /* Sidebar background */
+                            light: '#e8f5e9',  /* Soft green background */
+                            primary: '#2e7d32',/* Main green text/accents */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8; 
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden font-sans text-gray-800">
+
+    <!-- Mobile Backdrop Overlay -->
+    <div id="sidebarBackdrop" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden transition-opacity duration-300" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar (Slide-over drawer on Mobile, fixed column on Desktop) -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-brand-dark text-white z-50 transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300 ease-in-out flex flex-col h-full shadow-lg">
+        <!-- Logo Area -->
+        <div class="h-16 flex items-center justify-between px-6 border-b border-green-800/50">
+            <div class="flex items-center">
+                <i class="fa-solid fa-leaf text-green-400 text-2xl mr-3"></i>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">KisanSetu</h1>
+                    <p class="text-[10px] text-green-200">Farm to Market. Direct & Fair.</p>
+                </div>
+            </div>
+            <!-- Close Button for Mobile Drawer -->
+            <button onclick="toggleSidebar()" class="md:hidden text-gray-300 hover:text-white p-1 focus:outline-none">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1" id="navLinks">
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Dashboard')" class="nav-item flex items-center px-6 py-3 bg-white/10 border-l-4 border-green-400 text-white transition-all">
+                        <i class="fa-solid fa-house w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Users')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-users w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Farmers')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-tractor w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Farmers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Buyers')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-cart-shopping w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Buyers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Orders')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-clipboard-list w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Produce Listings')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-seedling w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Produce Listings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Logistics & Pickup')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-truck w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Logistics & Pickup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Reports')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-chart-column w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActiveNav(this, 'Settings')" class="nav-item flex items-center px-6 py-3 text-gray-300 hover:bg-white/5 hover:text-white transition-all">
+                        <i class="fa-solid fa-gear w-5 text-center mr-3"></i>
+                        <span class="font-medium text-sm">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Bottom Graphic/Quote -->
+        <div class="p-6 bg-gradient-to-t from-black/20 to-transparent">
+            <i class="fa-solid fa-seedling text-green-400 text-3xl mb-2 block text-center"></i>
+            <p class="text-xs text-center text-green-100 leading-tight">Supporting Farmers<br>Building a Better Tomorrow</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Top Header Navbar -->
+        <header class="h-16 bg-white flex items-center justify-between px-4 lg:px-8 shadow-sm z-10 shrink-0">
+            
+            <!-- Mobile Menu Toggle Button + Mobile Logo/Title -->
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-600 hover:text-brand-primary p-2 rounded-lg hover:bg-gray-100 focus:outline-none transition-colors">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                
+                <!-- Visible ONLY on Mobile View -->
+                <div class="flex items-center md:hidden border-l pl-3 border-gray-200">
+                    <i class="fa-solid fa-leaf text-brand-primary text-xl mr-2"></i>
+                    <span class="font-bold text-gray-800 text-lg tracking-wide">KisanSetu</span>
+                </div>
+            </div>
+
+            <!-- Search Input (Desktop & Tablet) -->
+            <div class="relative w-full max-w-xs md:max-w-md hidden sm:block mx-4">
+                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input id="searchInput" type="text" onkeyup="filterTables()" placeholder="Search orders, produce, buyers..." class="w-full bg-gray-100 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary focus:bg-white transition-all">
+            </div>
+
+            <!-- Right Side: Notifications & Admin Profile -->
+            <div class="flex items-center space-x-4 sm:space-x-6 relative">
+                
+                <!-- Notification Bell -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('notificationsMenu')" class="p-2 text-gray-600 hover:text-brand-primary focus:outline-none rounded-full hover:bg-gray-100 transition-colors relative">
+                        <i class="fa-regular fa-bell text-xl"></i>
+                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    
+                    <!-- Notifications Dropdown -->
+                    <div id="notificationsMenu" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
+                        <div class="px-4 py-2 border-b border-gray-100 flex justify-between items-center">
+                            <span class="font-bold text-sm text-gray-800">Notifications</span>
+                            <span class="text-xs text-brand-primary font-medium cursor-pointer hover:underline">Mark all read</span>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50">
+                                <span class="p-2 bg-green-100 text-green-600 rounded-full text-xs mr-3"><i class="fa-solid fa-user-plus"></i></span>
+                                <div>
+                                    <p class="text-xs text-gray-800 font-medium">New Farmer Registration</p>
+                                    <p class="text-[11px] text-gray-500">Ramesh Yadav registered from Lucknow.</p>
+                                    <p class="text-[10px] text-gray-400 mt-1">2 mins ago</p>
+                                </div>
+                            </a>
+                            <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50">
+                                <span class="p-2 bg-blue-100 text-blue-600 rounded-full text-xs mr-3"><i class="fa-solid fa-cart-shopping"></i></span>
+                                <div>
+                                    <p class="text-xs text-gray-800 font-medium">New Order #ORD0056</p>
+                                    <p class="text-[11px] text-gray-500">AgroMart ordered 10 sacks Wheat.</p>
+                                    <p class="text-[10px] text-gray-400 mt-1">15 mins ago</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Profile Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('profileMenu')" class="flex items-center focus:outline-none p-1 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="w-9 h-9 bg-brand-light rounded-full flex items-center justify-center text-brand-primary font-bold mr-2 md:mr-3 border border-green-200">
+                            A
+                        </div>
+                        <div class="hidden sm:block text-left">
+                            <p class="font-semibold text-gray-800 text-sm leading-tight">Admin</p>
+                            <p class="text-gray-500 text-[11px]">Administrator</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-gray-400 text-xs ml-2"></i>
+                    </button>
+
+                    <!-- Profile Dropdown Menu -->
+                    <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"><i class="fa-regular fa-user mr-2 text-gray-400"></i> Profile Settings</a>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"><i class="fa-solid fa-shield-halved mr-2 text-gray-400"></i> Security</a>
+                        <hr class="my-1 border-gray-100">
+                        <a href="#" onclick="alert('Logged out successfully!')" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-arrow-right-from-bracket mr-2"></i> Logout</a>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- Scrollable Dashboard Content -->
+        <div class="flex-1 overflow-auto p-4 lg:p-8">
+            
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-brand-light to-white p-6 rounded-2xl mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm border border-green-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                        Welcome, <span id="currentViewTitle">Admin</span>! <span class="text-2xl">🌱</span>
+                    </h2>
+                    <p class="text-gray-600 mt-1 text-sm">Monitor platform activity, manage users, and ensure smooth operations.</p>
+                </div>
+                <div class="text-left md:text-right">
+                    <p class="text-brand-primary font-medium italic text-sm">"Support Farmers. Stronger Communities."</p>
+                    <p class="text-gray-500 text-xs mt-1">Tuesday, 2 Sep 2026</p>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar (Appears only on XS screens) -->
+            <div class="block sm:hidden mb-6">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+                    <input type="text" onkeyup="filterTables()" placeholder="Search orders, produce..." class="w-full bg-white border border-gray-200 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                </div>
+            </div>
+
+            <!-- Stat Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                        <i class="fa-solid fa-users text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">1,245</h3>
+                        <p class="text-gray-500 text-xs font-medium uppercase tracking-wide">Total Farmers</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                        <i class="fa-solid fa-user-tag text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">2,864</h3>
+                        <p class="text-gray-500 text-xs font-medium uppercase tracking-wide">Total Buyers</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
+                        <i class="fa-solid fa-box text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">5,732</h3>
+                        <p class="text-gray-500 text-xs font-medium uppercase tracking-wide">Total Orders</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 shrink-0">
+                        <i class="fa-solid fa-truck-fast text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">312</h3>
+                        <p class="text-gray-500 text-xs font-medium uppercase tracking-wide">Scheduled Pickups</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tables & Widgets Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column (Takes up 2/3 space) -->
+                <div class="lg:col-span-2 space-y-8">
+                    
+                    <!-- Recent Orders Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-gray-800 text-lg">Recent Orders</h3>
+                            <button onclick="alert('Viewing all recent orders')" class="text-brand-primary text-sm font-medium hover:underline focus:outline-none">View All &rarr;</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-gray-600" id="ordersTable">
+                                <thead>
+                                    <tr class="border-b border-gray-200 text-gray-500">
+                                        <th class="pb-3 font-medium">Order ID</th>
+                                        <th class="pb-3 font-medium">Buyer</th>
+                                        <th class="pb-3 font-medium">Produce</th>
+                                        <th class="pb-3 font-medium">Quantity</th>
+                                        <th class="pb-3 font-medium">Status</th>
+                                        <th class="pb-3 font-medium">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-800 font-medium">ORD0056</td>
+                                        <td class="py-3">AgroMart</td>
+                                        <td class="py-3">Wheat</td>
+                                        <td class="py-3 text-gray-500">10 sacks</td>
+                                        <td class="py-3"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Confirmed</span></td>
+                                        <td class="py-3">2 Sep 2026</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-800 font-medium">ORD0055</td>
+                                        <td class="py-3">FreshFoods</td>
+                                        <td class="py-3">Rice</td>
+                                        <td class="py-3 text-gray-500">25 sacks</td>
+                                        <td class="py-3"><span class="px-2.5 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">In Transit</span></td>
+                                        <td class="py-3">2 Sep 2026</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-800 font-medium">ORD0054</td>
+                                        <td class="py-3">RetailHub</td>
+                                        <td class="py-3">Toor Dal</td>
+                                        <td class="py-3 text-gray-500">15 sacks</td>
+                                        <td class="py-3"><span class="px-2.5 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium">Pending</span></td>
+                                        <td class="py-3">1 Sep 2026</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-800 font-medium">ORD0053</td>
+                                        <td class="py-3">CityMart</td>
+                                        <td class="py-3">Moong Dal</td>
+                                        <td class="py-3 text-gray-500">20 sacks</td>
+                                        <td class="py-3"><span class="px-2.5 py-1 bg-brand-light text-brand-primary text-xs rounded-full font-medium">Delivered</span></td>
+                                        <td class="py-3">31 Aug 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Pickups Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-gray-800 text-lg">Upcoming Pickups</h3>
+                            <button onclick="alert('Viewing upcoming pickups schedule')" class="text-brand-primary text-sm font-medium hover:underline focus:outline-none">View All &rarr;</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-gray-600">
+                                <thead>
+                                    <tr class="border-b border-gray-200 text-gray-500">
+                                        <th class="pb-3 font-medium">Date</th>
+                                        <th class="pb-3 font-medium">Farmer</th>
+                                        <th class="pb-3 font-medium">Produce</th>
+                                        <th class="pb-3 font-medium">Quantity</th>
+                                        <th class="pb-3 font-medium">Collection Center</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 font-medium text-gray-700"><i class="fa-regular fa-calendar-check text-green-500 mr-2"></i>3 Sep 2026</td>
+                                        <td class="py-3">Ramesh Singh</td>
+                                        <td class="py-3">Wheat</td>
+                                        <td class="py-3">20 sacks</td>
+                                        <td class="py-3">Lucknow Center</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 font-medium text-gray-700"><i class="fa-regular fa-calendar-check text-green-500 mr-2"></i>4 Sep 2026</td>
+                                        <td class="py-3">Sita Devi</td>
+                                        <td class="py-3">Rice</td>
+                                        <td class="py-3">15 sacks</td>
+                                        <td class="py-3">Kanpur Center</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (Takes up 1/3 space) -->
+                <div class="space-y-8">
+                    
+                    <!-- Quick Actions Grid -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                        <h3 class="font-bold text-gray-800 text-lg mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button onclick="openActionModal('Add Farmer')" class="flex flex-col items-center justify-center p-4 border border-gray-100 rounded-lg bg-gray-50 hover:bg-brand-light hover:border-brand-primary transition-colors group">
+                                <div class="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-brand-primary">Add Farmer</span>
+                            </button>
+                            <button onclick="openActionModal('Add Buyer')" class="flex flex-col items-center justify-center p-4 border border-gray-100 rounded-lg bg-gray-50 hover:bg-blue-50 hover:border-blue-500 transition-colors group">
+                                <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-blue-600">Add Buyer</span>
+                            </button>
+                            <button onclick="openActionModal('Manage Produce')" class="flex flex-col items-center justify-center p-4 border border-gray-100 rounded-lg bg-gray-50 hover:bg-orange-50 hover:border-orange-500 transition-colors group">
+                                <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-box-open"></i>
+                                </div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-orange-600">Manage Produce</span>
+                            </button>
+                            <button onclick="openActionModal('Assign Pickup')" class="flex flex-col items-center justify-center p-4 border border-gray-100 rounded-lg bg-gray-50 hover:bg-purple-50 hover:border-purple-500 transition-colors group">
+                                <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-truck"></i>
+                                </div>
+                                <span class="text-xs font-medium text-gray-600 group-hover:text-purple-600">Assign Pickup</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity List -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-gray-800 text-lg">Recent Activity</h3>
+                            <button onclick="alert('Viewing full activity log')" class="text-brand-primary text-sm font-medium hover:underline focus:outline-none">View All</button>
+                        </div>
+                        <div class="space-y-6">
+                            <!-- Item 1 -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-regular fa-user text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">New farmer registered</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">Ramesh Yadav &bull; 2 min ago</p>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-cart-shopping text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">New order placed</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">ORD0056 &bull; 10 sacks Wheat &bull; 15 min ago</p>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-truck text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Pickup scheduled</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">Lucknow Center &bull; 30 min ago</p>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 w-8 h-8 rounded-full bg-brand-light text-brand-primary flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Order delivered</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">ORD0048 &bull; 20 sacks Rice &bull; 2 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <footer class="mt-8 pt-4 border-t border-gray-200 text-center text-gray-500 text-sm">
+                &copy; 2026 KisanSetu Admin Portal. All rights reserved.
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Quick Action Dynamic Modal -->
+    <div id="actionModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative transform transition-all">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 id="modalTitle" class="text-lg font-bold text-gray-800">Action</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Full Name / Entity Name</label>
+                    <input type="text" required placeholder="e.g. Suresh Kumar" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Contact Phone</label>
+                    <input type="tel" required placeholder="+91 9876543210" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Location / Center</label>
+                    <input type="text" required placeholder="e.g. Kanpur Region" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary">
+                </div>
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 border rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-green-800 transition-colors">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        // Toggle Sidebar Drawer for Mobile View
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        // Active Sidebar Tab Highlighter
+        function setActiveNav(element, tabName) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('bg-white/10', 'border-l-4', 'border-green-400', 'text-white');
+                item.classList.add('text-gray-300');
+            });
+            
+            element.classList.add('bg-white/10', 'border-l-4', 'border-green-400', 'text-white');
+            element.classList.remove('text-gray-300');
+
+            // Update Header Title based on selected tab
+            document.getElementById('currentViewTitle').innerText = tabName;
+
+            // Auto Close sidebar on mobile selection
+            if (window.innerWidth < 768) {
+                toggleSidebar();
+            }
+        }
+
+        // Toggle Header Dropdowns (Notifications & Profile)
+        function toggleDropdown(id) {
+            const menu = document.getElementById(id);
+            const isHidden = menu.classList.contains('hidden');
+            
+            // Close all dropdowns first
+            document.getElementById('notificationsMenu').classList.add('hidden');
+            document.getElementById('profileMenu').classList.add('hidden');
+
+            if (isHidden) {
+                menu.classList.remove('hidden');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('#notificationsMenu') && 
+                !event.target.closest('#profileMenu') && 
+                !event.target.closest('button')) {
+                document.getElementById('notificationsMenu').classList.add('hidden');
+                document.getElementById('profileMenu').classList.add('hidden');
+            }
+        }
+
+        // Real-time Search Filter for Recent Orders Table
+        function filterTables() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#ordersTable tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? '' : 'none';
+            });
+        }
+
+        // Quick Action Modal Logic
+        function openActionModal(title) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('actionModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('actionModal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Action completed successfully!');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
