@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0e4a32">
+  <title>KisanSetu Admin Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              dark: '#0e4a32',
+              primary: '#2e7d32',
+              light: '#e8f5e9'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Inter, sans-serif;
+    }
+
+    button,
+    a,
+    input,
+    select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f5f7f6;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c7d2cc;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9caf9f;
+    }
+
+    .sidebar-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, .2) transparent;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 255, 255, .11);
+      color: #fff;
+      border-left: 4px solid #86efac;
+      padding-left: 20px;
+    }
+
+    .nav-item.active i {
+      color: #86efac;
+    }
+
+    .page-section {
+      animation: fadeIn .22s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-card {
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, .07);
+      border-color: #d8e8dc;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      min-width: 680px;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    tbody tr {
+      transition: background .15s ease;
+    }
+
+    .modal-backdrop {
+      backdrop-filter: blur(3px);
+    }
+
+    .toast {
+      animation: toastIn .25s ease, toastOut .3s ease 2.7s forwards;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes toastOut {
+      to {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .mobile-sidebar-open {
+        transform: translateX(0) !important;
+      }
+
+      table {
+        min-width: 760px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 overflow-hidden">
+  <!-- Mobile overlay -->
+  <div class="app-shell flex h-screen w-full min-w-0">
+    <div id="sidebarBackdrop" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" aria-hidden="true"></div>
+
+    <aside id="sidebar"
+      class="fixed md:relative inset-y-0 left-0 z-50 w-64 shrink-0 -translate-x-full md:translate-x-0 transition-transform duration-300 ease-out bg-brand-dark text-white flex flex-col shadow-xl">
+      <div class="h-16 shrink-0 px-5 border-b border-white/10 flex items-center justify-between">
+        <button class="flex items-center text-left" onclick="navigate('Dashboard')">
+          <span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center mr-3">
+            <i class="fa-solid fa-leaf text-green-300"></i>
+          </span>
+          <span>
+            <span class="block text-lg font-extrabold tracking-wide">KisanSetu</span>
+            <span class="block text-[10px] text-green-200">Farm to Market. Direct & Fair.</span>
+          </span>
+        </button>
+        <button id="closeSidebar" class="md:hidden p-2 text-gray-300 hover:text-white" aria-label="Close menu">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="px-4 pt-5 pb-2 text-[10px] uppercase tracking-widest text-green-200/70 font-bold">
+        Main Menu
+      </div>
+
+      <nav class="flex-1 overflow-y-auto sidebar-scroll px-3 pb-4">
+        <ul id="navLinks" class="space-y-1">
+          <li><a href="#dashboard" data-section="Dashboard"
+              class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-house w-5 text-center"></i><span>Dashboard</span></a></li>
+          <li><a href="#users" data-section="Users"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-users w-5 text-center"></i><span>Users</span></a></li>
+          <li><a href="#farmers" data-section="Farmers"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-tractor w-5 text-center"></i><span>Farmers</span></a></li>
+          <li><a href="#buyers" data-section="Buyers"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-cart-shopping w-5 text-center"></i><span>Buyers</span></a></li>
+          <li><a href="#orders" data-section="Orders"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-clipboard-list w-5 text-center"></i><span>Orders</span></a></li>
+          <li><a href="#produce-listings" data-section="Produce Listings"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-seedling w-5 text-center"></i><span>Produce Listings</span></a></li>
+          <li><a href="preview.html" onclick="go('preview.html')" data-section="Logistics & Pickup"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-truck w-5 text-center"></i><span>Logistics & Pickup</span></a></li>
+          <li><a href="orders.html" data-section="Reports"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-chart-column w-5 text-center"></i><span>Reports</span></a></li>
+          <li><a href="#settings" data-section="Settings"
+              class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-white/5 hover:text-white">
+              <i class="fa-solid fa-gear w-5 text-center"></i><span>Settings</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="p-4">
+        <div class="rounded-xl bg-white/5 border border-white/10 p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="w-9 h-9 rounded-lg bg-green-400/10 flex items-center justify-center">
+              <i class="fa-solid fa-seedling text-green-300"></i>
+            </span>
+            <div>
+              <p class="text-xs font-semibold">KisanSetu Admin</p>
+              <p class="text-[10px] text-green-100/60">Platform operations</p>
+            </div>
+          </div>
+          <p class="text-[10px] leading-relaxed text-green-100/70">Supporting farmers and building a better tomorrow.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
+      <!-- Header -->
+      <header
+        class="h-16 shrink-0 bg-white border-b border-gray-100 flex items-center justify-between px-4 sm:px-6 lg:px-8 z-30">
+        <div class="flex items-center min-w-0">
+          <button id="openSidebar" class="md:hidden p-2 -ml-2 mr-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+            aria-label="Open menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+          <div class="md:hidden flex items-center gap-2">
+            <i class="fa-solid fa-leaf text-brand-primary"></i>
+            <span class="font-extrabold">KisanSetu</span>
+          </div>
+
+          <div class="hidden md:block">
+            <p class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Admin Portal</p>
+            <h1 id="currentViewTitle" class="font-bold text-gray-800 leading-tight">Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="hidden sm:block flex-1 min-w-0 max-w-lg mx-4">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+          <input id="searchInput" type="search" placeholder="Search current section..." autocomplete="off"
+            class="w-full bg-gray-100 border border-transparent rounded-full py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary/30 focus:bg-white focus:border-green-200">
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+          <div class="relative">
+            <button id="notificationButton"
+              class="relative p-2.5 text-gray-600 hover:text-brand-primary hover:bg-gray-100 rounded-full"
+              aria-label="Notifications">
+              <i class="fa-regular fa-bell text-lg"></i>
+              <span id="notificationBadge"
+                class="absolute top-1 right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center">3</span>
+            </button>
+            <div id="notificationsMenu"
+              class="hidden absolute right-0 top-12 w-80 max-w-[calc(100vw-2rem)] bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden">
+              <div class="px-4 py-3 border-b flex items-center justify-between">
+                <span class="font-bold text-sm">Notifications</span>
+                <button id="markRead" class="text-xs text-brand-primary font-semibold hover:underline">Mark all
+                  read</button>
+              </div>
+              <div class="max-h-72 overflow-y-auto">
+                <button class="w-full text-left px-4 py-3 hover:bg-gray-50 border-b flex gap-3">
+                  <span
+                    class="w-8 h-8 shrink-0 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs"><i
+                      class="fa-solid fa-user-plus"></i></span>
+                  <span><b class="block text-xs">New Farmer Registration</b><span
+                      class="text-[11px] text-gray-500">Ramesh Yadav registered from Lucknow.</span><small
+                      class="block text-[10px] text-gray-400 mt-1">2 mins ago</small></span>
+                </button>
+                <button class="w-full text-left px-4 py-3 hover:bg-gray-50 border-b flex gap-3">
+                  <span
+                    class="w-8 h-8 shrink-0 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs"><i
+                      class="fa-solid fa-cart-shopping"></i></span>
+                  <span><b class="block text-xs">New Order #ORD0056</b><span class="text-[11px] text-gray-500">AgroMart
+                      ordered 10 sacks Wheat.</span><small class="block text-[10px] text-gray-400 mt-1">15 mins
+                      ago</small></span>
+                </button>
+                <button class="w-full text-left px-4 py-3 hover:bg-gray-50 flex gap-3">
+                  <span
+                    class="w-8 h-8 shrink-0 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs"><i
+                      class="fa-solid fa-truck"></i></span>
+                  <span><b class="block text-xs">Pickup scheduled</b><span class="text-[11px] text-gray-500">Lucknow
+                      Center pickup assigned.</span><small class="block text-[10px] text-gray-400 mt-1">30 mins
+                      ago</small></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative">
+            <button id="profileButton" class="flex items-center gap-2 p-1.5 hover:bg-gray-100 rounded-lg"
+              aria-label="Admin profile">
+              <span
+                class="w-9 h-9 rounded-full bg-brand-light border border-green-200 text-brand-primary font-bold flex items-center justify-center">A</span>
+              <span class="hidden lg:block text-left">
+                <b class="block text-sm leading-tight">Admin</b>
+                <small class="text-[10px] text-gray-500">Administrator</small>
+              </span>
+              <i class="fa-solid fa-chevron-down text-gray-400 text-[10px] hidden sm:block"></i>
+            </button>
+            <div id="profileMenu"
+              class="hidden absolute right-0 top-12 w-52 bg-white border border-gray-100 rounded-xl shadow-2xl py-2">
+              <button onclick="showToast('Profile settings opened')"
+                class="w-full text-left px-4 py-2.5 text-sm hover:bg-gray-50"><i
+                  class="fa-regular fa-user w-5 text-gray-400"></i> Profile Settings</button>
+              <button onclick="showToast('Security settings opened')"
+                class="w-full text-left px-4 py-2.5 text-sm hover:bg-gray-50"><i
+                  class="fa-solid fa-shield-halved w-5 text-gray-400"></i> Security</button>
+              <hr class="my-1 border-gray-100">
+              <button onclick="showToast('Logged out successfully')"
+                class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50"><i
+                  class="fa-solid fa-arrow-right-from-bracket w-5"></i> Logout</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div id="content" class="flex-1 min-w-0 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <!-- Dashboard -->
+        <section id="dashboardSection" class="page-section">
+          <div
+            class="rounded-2xl bg-gradient-to-r from-green-50 via-white to-white border border-green-100 p-5 sm:p-6 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <span
+                  class="inline-flex items-center gap-2 text-xs font-bold text-brand-primary bg-green-100 px-3 py-1.5 rounded-full mb-3"><i
+                    class="fa-solid fa-leaf"></i> Platform Overview</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold">Good day, Admin 👋</h2>
+                <p class="text-sm text-gray-500 mt-1">Monitor KisanSetu activity, orders, farmers and logistics from one
+                  place.</p>
+              </div>
+              <button onclick="showToast('Dashboard data refreshed')"
+                class="px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm font-semibold hover:border-green-300 hover:text-brand-primary shadow-sm"><i
+                  class="fa-solid fa-rotate-right mr-2"></i>Refresh</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+            <div class="stat-card bg-white rounded-xl border p-5 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Total Farmers</p>
+                  <h3 class="text-3xl font-extrabold mt-2">1,245</h3>
+                  <p class="text-xs text-green-600 mt-2 font-medium">↑ 8.4% this month</p>
+                </div><span class="w-10 h-10 rounded-lg bg-green-100 text-green-600 flex items-center justify-center"><i
+                    class="fa-solid fa-tractor"></i></span>
+              </div>
+            </div>
+            <div class="stat-card bg-white rounded-xl border p-5 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Total Buyers</p>
+                  <h3 class="text-3xl font-extrabold mt-2">2,864</h3>
+                  <p class="text-xs text-blue-600 mt-2 font-medium">↑ 5.2% this month</p>
+                </div><span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center"><i
+                    class="fa-solid fa-store"></i></span>
+              </div>
+            </div>
+            <div class="stat-card bg-white rounded-xl border p-5 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Total Orders</p>
+                  <h3 class="text-3xl font-extrabold mt-2">5,732</h3>
+                  <p class="text-xs text-orange-600 mt-2 font-medium">142 pending</p>
+                </div><span
+                  class="w-10 h-10 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center"><i
+                    class="fa-solid fa-clipboard-list"></i></span>
+              </div>
+            </div>
+            <div class="stat-card bg-white rounded-xl border p-5 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Scheduled Pickups</p>
+                  <h3 class="text-3xl font-extrabold mt-2">312</h3>
+                  <p class="text-xs text-purple-600 mt-2 font-medium">48 today</p>
+                </div><span
+                  class="w-10 h-10 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center"><i
+                    class="fa-solid fa-truck"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div class="xl:col-span-2 bg-white rounded-xl border shadow-sm">
+              <div class="p-5 border-b flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold">Recent Orders</h3>
+                  <p class="text-xs text-gray-400 mt-1">Latest platform activity</p>
+                </div><button onclick="navigate('Orders')"
+                  class="text-xs font-semibold text-brand-primary hover:underline">View all</button>
+              </div>
+              <div class="table-wrap p-5">
+                <table class="w-full text-left text-sm">
+                  <thead>
+                    <tr class="border-b text-xs uppercase tracking-wide text-gray-400">
+                      <th class="pb-3 pr-4">Order ID</th>
+                      <th class="pb-3 pr-4">Buyer</th>
+                      <th class="pb-3 pr-4">Produce</th>
+                      <th class="pb-3 pr-4">Qty</th>
+                      <th class="pb-3 pr-4">Status</th>
+                      <th class="pb-3">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b last:border-0 hover:bg-gray-50">
+                      <td class="py-4 pr-4 font-bold">ORD0056</td>
+                      <td class="py-4 pr-4">AgroMart</td>
+                      <td class="py-4 pr-4">Wheat</td>
+                      <td class="py-4 pr-4">10 sacks</td>
+                      <td class="py-4 pr-4"><span class="badge green">Confirmed</span></td>
+                      <td class="py-4">2 Sep 2026</td>
+                    </tr>
+                    <tr class="border-b last:border-0 hover:bg-gray-50">
+                      <td class="py-4 pr-4 font-bold">ORD0055</td>
+                      <td class="py-4 pr-4">FreshFoods</td>
+                      <td class="py-4 pr-4">Rice</td>
+                      <td class="py-4 pr-4">25 sacks</td>
+                      <td class="py-4 pr-4"><span class="badge blue">In Transit</span></td>
+                      <td class="py-4">2 Sep 2026</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                      <td class="py-4 pr-4 font-bold">ORD0054</td>
+                      <td class="py-4 pr-4">RetailHub</td>
+                      <td class="py-4 pr-4">Toor Dal</td>
+                      <td class="py-4 pr-4">15 sacks</td>
+                      <td class="py-4 pr-4"><span class="badge orange">Pending</span></td>
+                      <td class="py-4">1 Sep 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl border shadow-sm p-5">
+              <h3 class="font-bold">Recent Activity</h3>
+              <p class="text-xs text-gray-400 mt-1 mb-5">Latest events</p>
+              <div class="space-y-5">
+                <div class="flex gap-3"><span
+                    class="w-9 h-9 shrink-0 rounded-full bg-green-100 text-green-600 flex items-center justify-center"><i
+                      class="fa-solid fa-user-plus text-xs"></i></span>
+                  <div><b class="text-sm">New farmer registered</b>
+                    <p class="text-xs text-gray-500 mt-0.5">Ramesh Yadav · 2 min ago</p>
+                  </div>
+                </div>
+                <div class="flex gap-3"><span
+                    class="w-9 h-9 shrink-0 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i
+                      class="fa-solid fa-cart-shopping text-xs"></i></span>
+                  <div><b class="text-sm">New order placed</b>
+                    <p class="text-xs text-gray-500 mt-0.5">ORD0056 · 15 min ago</p>
+                  </div>
+                </div>
+                <div class="flex gap-3"><span
+                    class="w-9 h-9 shrink-0 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i
+                      class="fa-solid fa-truck text-xs"></i></span>
+                  <div><b class="text-sm">Pickup scheduled</b>
+                    <p class="text-xs text-gray-500 mt-0.5">Lucknow Center · 30 min ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Users -->
+        <section id="usersSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Users</h2>
+              <p>Manage all accounts registered on KisanSetu.</p>
+            </div><button onclick="openActionModal('Add User')" class="primary-btn"><i
+                class="fa-solid fa-plus mr-2"></i>Add User</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>All Users</p>
+              <h3>4,109</h3><span class="text-green-600">Total registered</span>
+            </div>
+            <div class="stat-card card">
+              <p>Active Today</p>
+              <h3>3,421</h3><span class="text-green-600">Users active today</span>
+            </div>
+            <div class="stat-card card">
+              <p>Pending Verification</p>
+              <h3>86</h3><span class="text-orange-600">Needs review</span>
+            </div>
+            <div class="stat-card card">
+              <p>Suspended</p>
+              <h3>14</h3><span class="text-red-600">Requires attention</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Phone</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Ramesh Yadav</b></td>
+                  <td>Farmer</td>
+                  <td>+91 98765 43210</td>
+                  <td>Lucknow</td>
+                  <td><span class="badge green">Active</span></td>
+                  <td><button class="link-btn" onclick="showToast('User details opened')">View</button></td>
+                </tr>
+                <tr>
+                  <td><b>AgroMart</b></td>
+                  <td>Buyer</td>
+                  <td>+91 98765 11223</td>
+                  <td>Delhi</td>
+                  <td><span class="badge green">Active</span></td>
+                  <td><button class="link-btn" onclick="showToast('User details opened')">View</button></td>
+                </tr>
+                <tr>
+                  <td><b>Sita Devi</b></td>
+                  <td>Farmer</td>
+                  <td>+91 98111 22334</td>
+                  <td>Kanpur</td>
+                  <td><span class="badge orange">Pending</span></td>
+                  <td><button class="link-btn" onclick="showToast('Verification opened')">Review</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Farmers -->
+        <section id="farmersSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Farmers</h2>
+              <p>Manage farmer profiles, verification and produce.</p>
+            </div><button onclick="openActionModal('Add Farmer')" class="primary-btn"><i
+                class="fa-solid fa-plus mr-2"></i>Add Farmer</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Registered</p>
+              <h3>1,245</h3><span class="text-green-600">All farmers</span>
+            </div>
+            <div class="stat-card card">
+              <p>Verified</p>
+              <h3>1,168</h3><span class="text-green-600">93.8% verified</span>
+            </div>
+            <div class="stat-card card">
+              <p>Pending</p>
+              <h3>77</h3><span class="text-orange-600">Awaiting verification</span>
+            </div>
+            <div class="stat-card card">
+              <p>Active Listings</p>
+              <h3>1,486</h3><span class="text-blue-600">Produce listings</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Farmer</th>
+                  <th>Village</th>
+                  <th>Produce</th>
+                  <th>Listings</th>
+                  <th>Verification</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Ramesh Singh</b></td>
+                  <td>Lucknow</td>
+                  <td>Wheat</td>
+                  <td>12</td>
+                  <td><span class="badge green">Verified</span></td>
+                  <td><button class="link-btn" onclick="showToast('Farmer profile opened')">View</button></td>
+                </tr>
+                <tr>
+                  <td><b>Sita Devi</b></td>
+                  <td>Kanpur</td>
+                  <td>Rice</td>
+                  <td>8</td>
+                  <td><span class="badge orange">Pending</span></td>
+                  <td><button class="link-btn" onclick="showToast('Verification opened')">Review</button></td>
+                </tr>
+                <tr>
+                  <td><b>Mohan Kumar</b></td>
+                  <td>Agra</td>
+                  <td>Potato</td>
+                  <td>15</td>
+                  <td><span class="badge green">Verified</span></td>
+                  <td><button class="link-btn" onclick="showToast('Farmer profile opened')">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Buyers -->
+        <section id="buyersSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Buyers</h2>
+              <p>Manage buyers, businesses and procurement activity.</p>
+            </div><button onclick="openActionModal('Add Buyer')" class="primary-btn"><i
+                class="fa-solid fa-plus mr-2"></i>Add Buyer</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Registered Buyers</p>
+              <h3>2,864</h3><span class="text-green-600">Total buyers</span>
+            </div>
+            <div class="stat-card card">
+              <p>Active Buyers</p>
+              <h3>2,513</h3><span class="text-green-600">87.8% active</span>
+            </div>
+            <div class="stat-card card">
+              <p>New This Month</p>
+              <h3>184</h3><span class="text-blue-600">New registrations</span>
+            </div>
+            <div class="stat-card card">
+              <p>Open Orders</p>
+              <h3>318</h3><span class="text-orange-600">Currently active</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Business</th>
+                  <th>Contact</th>
+                  <th>Location</th>
+                  <th>Orders</th>
+                  <th>Spent</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>AgroMart</b></td>
+                  <td>Vikas Sharma</td>
+                  <td>Delhi</td>
+                  <td>238</td>
+                  <td>₹12.4L</td>
+                  <td><span class="badge green">Active</span></td>
+                </tr>
+                <tr>
+                  <td><b>FreshFoods</b></td>
+                  <td>Neha Gupta</td>
+                  <td>Gurugram</td>
+                  <td>184</td>
+                  <td>₹9.8L</td>
+                  <td><span class="badge green">Active</span></td>
+                </tr>
+                <tr>
+                  <td><b>RetailHub</b></td>
+                  <td>Amit Jain</td>
+                  <td>Noida</td>
+                  <td>96</td>
+                  <td>₹4.2L</td>
+                  <td><span class="badge orange">Review</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Orders -->
+        <section id="ordersSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Orders</h2>
+              <p>Track and manage every produce order.</p>
+            </div><select id="orderStatusFilter" class="select-control">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="transit">In Transit</option>
+              <option value="delivered">Delivered</option>
+            </select>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Total Orders</p>
+              <h3>5,732</h3><span class="text-green-600">All orders</span>
+            </div>
+            <div class="stat-card card">
+              <p>Pending</p>
+              <h3>142</h3><span class="text-orange-600">Awaiting action</span>
+            </div>
+            <div class="stat-card card">
+              <p>In Transit</p>
+              <h3>318</h3><span class="text-blue-600">Being delivered</span>
+            </div>
+            <div class="stat-card card">
+              <p>Delivered</p>
+              <h3>5,104</h3><span class="text-green-600">Completed orders</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Buyer</th>
+                  <th>Farmer</th>
+                  <th>Produce</th>
+                  <th>Qty</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-status="confirmed">
+                  <td><b>ORD0056</b></td>
+                  <td>AgroMart</td>
+                  <td>Ramesh Singh</td>
+                  <td>Wheat</td>
+                  <td>10 sacks</td>
+                  <td><span class="badge green">Confirmed</span></td>
+                  <td>2 Sep 2026</td>
+                </tr>
+                <tr data-status="transit">
+                  <td><b>ORD0055</b></td>
+                  <td>FreshFoods</td>
+                  <td>Mohan Kumar</td>
+                  <td>Rice</td>
+                  <td>25 sacks</td>
+                  <td><span class="badge blue">In Transit</span></td>
+                  <td>2 Sep 2026</td>
+                </tr>
+                <tr data-status="pending">
+                  <td><b>ORD0054</b></td>
+                  <td>RetailHub</td>
+                  <td>Sita Devi</td>
+                  <td>Toor Dal</td>
+                  <td>15 sacks</td>
+                  <td><span class="badge orange">Pending</span></td>
+                  <td>1 Sep 2026</td>
+                </tr>
+                <tr data-status="delivered">
+                  <td><b>ORD0053</b></td>
+                  <td>CityMart</td>
+                  <td>Ramesh Singh</td>
+                  <td>Moong Dal</td>
+                  <td>20 sacks</td>
+                  <td><span class="badge green">Delivered</span></td>
+                  <td>31 Aug 2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Produce -->
+        <section id="produce-listingsSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Produce Listings</h2>
+              <p>Review, approve and manage farmer produce listings.</p>
+            </div><button onclick="openActionModal('Add Produce Listing')" class="primary-btn"><i
+                class="fa-solid fa-plus mr-2"></i>Add Listing</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Active Listings</p>
+              <h3>1,486</h3><span class="text-green-600">Currently listed</span>
+            </div>
+            <div class="stat-card card">
+              <p>Pending Approval</p>
+              <h3>64</h3><span class="text-orange-600">Needs review</span>
+            </div>
+            <div class="stat-card card">
+              <p>Total Stock</p>
+              <h3>18,420 qtl</h3><span class="text-green-600">Available produce</span>
+            </div>
+            <div class="stat-card card">
+              <p>Categories</p>
+              <h3>18</h3><span class="text-blue-600">Produce categories</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Produce</th>
+                  <th>Farmer</th>
+                  <th>Quantity</th>
+                  <th>Price / Qtl</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Wheat</b></td>
+                  <td>Ramesh Singh</td>
+                  <td>200 qtl</td>
+                  <td>₹2,350</td>
+                  <td>Lucknow</td>
+                  <td><span class="badge green">Approved</span></td>
+                  <td><button class="link-btn" onclick="showToast('Listing opened')">View</button></td>
+                </tr>
+                <tr>
+                  <td><b>Rice</b></td>
+                  <td>Sita Devi</td>
+                  <td>150 qtl</td>
+                  <td>₹3,100</td>
+                  <td>Kanpur</td>
+                  <td><span class="badge orange">Pending</span></td>
+                  <td><button class="link-btn" onclick="showToast('Listing review opened')">Review</button></td>
+                </tr>
+                <tr>
+                  <td><b>Potato</b></td>
+                  <td>Mohan Kumar</td>
+                  <td>90 qtl</td>
+                  <td>₹1,800</td>
+                  <td>Agra</td>
+                  <td><span class="badge green">Approved</span></td>
+                  <td><button class="link-btn" onclick="showToast('Listing opened')">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Logistics -->
+        <section id="logistics-pickupSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Logistics & Pickup</h2>
+              <p>Coordinate collection centers, drivers and scheduled pickups.</p>
+            </div><button onclick="openActionModal('Assign Pickup')" class="primary-btn"><i
+                class="fa-solid fa-truck mr-2"></i>Assign Pickup</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Today</p>
+              <h3>48</h3><span class="text-orange-600">Pickups today</span>
+            </div>
+            <div class="stat-card card">
+              <p>Scheduled</p>
+              <h3>312</h3><span class="text-green-600">Upcoming pickups</span>
+            </div>
+            <div class="stat-card card">
+              <p>In Transit</p>
+              <h3>86</h3><span class="text-blue-600">Currently moving</span>
+            </div>
+            <div class="stat-card card">
+              <p>Completed</p>
+              <h3>226</h3><span class="text-green-600">Completed pickups</span>
+            </div>
+          </div>
+          <div class="card table-wrap p-5">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Pickup ID</th>
+                  <th>Date</th>
+                  <th>Farmer</th>
+                  <th>Produce</th>
+                  <th>Center</th>
+                  <th>Driver</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>PKP1024</b></td>
+                  <td>3 Sep 2026</td>
+                  <td>Ramesh Singh</td>
+                  <td>Wheat</td>
+                  <td>Lucknow Center</td>
+                  <td>Arjun</td>
+                  <td><span class="badge orange">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td><b>PKP1023</b></td>
+                  <td>3 Sep 2026</td>
+                  <td>Mohan Kumar</td>
+                  <td>Potato</td>
+                  <td>Agra Center</td>
+                  <td>Vijay</td>
+                  <td><span class="badge blue">In Transit</span></td>
+                </tr>
+                <tr>
+                  <td><b>PKP1022</b></td>
+                  <td>2 Sep 2026</td>
+                  <td>Sita Devi</td>
+                  <td>Rice</td>
+                  <td>Kanpur Center</td>
+                  <td>Rahul</td>
+                  <td><span class="badge green">Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Reports -->
+        <section id="reportsSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Reports</h2>
+              <p>Platform performance and operational reports.</p>
+            </div><button onclick="showToast('Reports refreshed')" class="secondary-btn"><i
+                class="fa-solid fa-rotate-right mr-2"></i>Refresh</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card card">
+              <p>Sales Value</p>
+              <h3>₹48.6L</h3><span class="text-green-600">+12.8% vs last month</span>
+            </div>
+            <div class="stat-card card">
+              <p>Orders</p>
+              <h3>5,732</h3><span class="text-blue-600">+8.4% vs last month</span>
+            </div>
+            <div class="stat-card card">
+              <p>Farmers</p>
+              <h3>1,245</h3><span class="text-orange-600">+6.1% vs last month</span>
+            </div>
+            <div class="stat-card card">
+              <p>Fulfillment</p>
+              <h3>94.2%</h3><span class="text-purple-600">+2.4% vs last month</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="card p-5">
+              <h3 class="font-bold text-lg">Order Performance</h3>
+              <p class="text-xs text-gray-400 mt-1 mb-6">Current fulfillment distribution</p>
+              <div class="space-y-5">
+                <div>
+                  <div class="flex justify-between text-sm mb-2"><span>Delivered</span><b>89%</b></div>
+                  <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-primary rounded-full" style="width:89%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-2"><span>In Transit</span><b>6%</b></div>
+                  <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-blue-500 rounded-full" style="width:6%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-2"><span>Pending</span><b>5%</b></div>
+                  <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-orange-500 rounded-full" style="width:5%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card p-5">
+              <h3 class="font-bold text-lg">Generate Reports</h3>
+              <p class="text-xs text-gray-400 mt-1 mb-5">Create a report for the selected area</p>
+              <div class="grid grid-cols-2 gap-3">
+                <button onclick="generateReport('Farmer')" class="report-btn"><i
+                    class="fa-solid fa-tractor text-green-600"></i><span>Farmer Report</span></button>
+                <button onclick="generateReport('Sales')" class="report-btn"><i
+                    class="fa-solid fa-chart-column text-blue-600"></i><span>Sales Report</span></button>
+                <button onclick="generateReport('Logistics')" class="report-btn"><i
+                    class="fa-solid fa-truck text-purple-600"></i><span>Logistics Report</span></button>
+                <button onclick="generateReport('Produce')" class="report-btn"><i
+                    class="fa-solid fa-seedling text-orange-600"></i><span>Produce Report</span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="settingsSection" class="page-section hidden">
+          <div class="section-head">
+            <div>
+              <h2>Settings</h2>
+              <p>Configure your KisanSetu admin portal.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="card p-5 lg:col-span-2">
+              <h3 class="font-bold text-lg">General Settings</h3>
+              <p class="text-xs text-gray-400 mt-1 mb-5">Basic portal configuration</p>
+              <form id="settingsForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <label class="field"><span>Portal Name</span><input value="KisanSetu Admin Portal"></label>
+                <label class="field"><span>Support Email</span><input type="email" value="support@kisansetu.in"></label>
+                <label class="field"><span>Default Location</span><input value="Delhi, India"></label>
+                <label class="field"><span>Currency</span><select>
+                    <option>Indian Rupee (₹)</option>
+                  </select></label>
+                <div class="md:col-span-2"><button class="primary-btn" type="submit">Save Changes</button></div>
+              </form>
+            </div>
+            <div class="card p-5">
+              <h3 class="font-bold text-lg">Notifications</h3>
+              <p class="text-xs text-gray-400 mt-1 mb-3">Choose which alerts you receive</p>
+              <label class="toggle-row"><span>New registrations</span><input type="checkbox" checked></label>
+              <label class="toggle-row"><span>New orders</span><input type="checkbox" checked></label>
+              <label class="toggle-row"><span>Pickup alerts</span><input type="checkbox" checked></label>
+            </div>
+            <div class="card p-5 lg:col-span-3">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-lg">Security</h3>
+                  <p class="text-xs text-gray-500 mt-1">Two-factor authentication adds extra protection to administrator
+                    accounts.</p>
+                </div><button onclick="showToast('2FA configuration opened')" class="secondary-btn">Configure
+                  2FA</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="mt-8 pt-5 border-t text-center text-xs text-gray-400">
+          © 2026 KisanSetu Admin Portal. All rights reserved.
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Action modal -->
+  <div id="actionModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/50 modal-backdrop">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+      <div class="px-6 py-4 border-b flex items-center justify-between">
+        <h3 id="modalTitle" class="font-bold text-lg">Action</h3>
+        <button id="closeModal" class="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg"><i
+            class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="actionForm" class="p-6 space-y-4">
+        <label class="field"><span>Full Name / Entity Name</span><input id="actionName" required
+            placeholder="e.g. Suresh Kumar"></label>
+        <label class="field"><span>Contact Phone</span><input id="actionPhone" type="tel" required
+            placeholder="+91 9876543210"></label>
+        <label class="field"><span>Location / Center</span><input id="actionLocation" required
+            placeholder="e.g. Kanpur Region"></label>
+        <div class="pt-2 flex justify-end gap-3"><button type="button" id="cancelModal"
+            class="secondary-btn">Cancel</button><button class="primary-btn" type="submit">Submit</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed right-4 bottom-4 z-[90] space-y-2"></div>
+
+  <style>
+    .app-shell {
+      min-width: 0;
+    }
+
+    @media (min-width: 768px) {
+      #sidebar {
+        position: relative;
+        inset: auto;
+        transform: none !important;
+      }
+
+      .app-shell>main {
+        min-width: 0;
+      }
+
+      #content {
+        min-width: 0;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: .3rem .55rem;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 600;
+    }
+
+    .badge.green {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge.blue {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .badge.orange {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: .75rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .section-head p {
+      color: #6b7280;
+      font-size: .875rem;
+      margin-top: .25rem;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .select-control {
+      border-radius: .55rem;
+      padding: .65rem 1rem;
+      font-size: .8rem;
+      font-weight: 600;
+      transition: .15s;
+    }
+
+    .primary-btn {
+      background: #2e7d32;
+      color: #fff;
+      border: 1px solid #2e7d32;
+    }
+
+    .primary-btn:hover {
+      background: #256628;
+    }
+
+    .secondary-btn,
+    .select-control {
+      background: #fff;
+      color: #4b5563;
+      border: 1px solid #d1d5db;
+    }
+
+    .secondary-btn:hover,
+    .select-control:hover {
+      background: #f9fafb;
+      border-color: #b9c4bc;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      padding: 1.25rem;
+    }
+
+    .stat-card>p {
+      color: #9ca3af;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 700;
+    }
+
+    .stat-card h3 {
+      font-size: 1.9rem;
+      line-height: 1;
+      font-weight: 800;
+      margin-top: .6rem;
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: .7rem;
+      margin-top: .6rem;
+      font-weight: 600;
+    }
+
+    .data-table {
+      width: 100%;
+      text-align: left;
+      font-size: .8rem;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      padding: .85rem 1rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      font-size: .65rem;
+      letter-spacing: .05em;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #f1f5f3;
+      white-space: nowrap;
+    }
+
+    .data-table tbody tr:hover {
+      background: #f9faf9;
+    }
+
+    .link-btn {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .link-btn:hover {
+      text-decoration: underline;
+    }
+
+    .field {
+      display: block;
+    }
+
+    .field>span {
+      display: block;
+      font-size: .7rem;
+      font-weight: 700;
+      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: .4rem;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: .55rem;
+      padding: .7rem .8rem;
+      font-size: .85rem;
+      outline: none;
+      background: #fff;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #86b889;
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, .1);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: .8rem;
+    }
+
+    .toggle-row:last-child {
+      border-bottom: 0;
+    }
+
+    .toggle-row input {
+      accent-color: #2e7d32;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .report-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .7rem;
+      border: 1px solid #e5e7eb;
+      border-radius: .65rem;
+      padding: 1rem;
+      background: #fff;
+      text-align: left;
+      transition: .15s;
+    }
+
+    .report-btn:hover {
+      background: #f8fbf8;
+      border-color: #c8dfcc;
+      transform: translateY(-1px);
+    }
+
+    .report-btn span {
+      font-size: .75rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    @media (min-width:640px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width:768px) {
+      .section-head {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width:1280px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+
+    function go(page) { window.location.href = page }
+
+    const sections = {
+      'Dashboard': 'dashboardSection',
+      'Users': 'usersSection',
+      'Farmers': 'farmersSection',
+      'Buyers': 'buyersSection',
+      'Orders': 'ordersSection',
+      'Produce Listings': 'produce-listingsSection',
+      'Logistics & Pickup': 'logistics-pickupSection',
+      'Reports': 'reportsSection',
+      'Settings': 'settingsSection'
+    };
+
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const content = document.getElementById('content');
+
+    function closeMenus(except = '') {
+      ['notificationsMenu', 'profileMenu'].forEach(id => {
+        if (id !== except) document.getElementById(id).classList.add('hidden');
+      });
+    }
+
+    function openSidebar() {
+      sidebar.classList.add('mobile-sidebar-open');
+      backdrop.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('mobile-sidebar-open');
+      backdrop.classList.add('hidden');
+    }
+
+    function navigate(tabName, updateHash = true) {
+      const targetId = sections[tabName];
+      if (!targetId) return;
+
+      document.querySelectorAll('.page-section').forEach(section => section.classList.add('hidden'));
+      document.getElementById(targetId).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const active = item.dataset.section === tabName;
+        item.classList.toggle('active', active);
+      });
+
+      document.getElementById('currentViewTitle').textContent = tabName;
+      const search = document.getElementById('searchInput');
+      search.value = '';
+      filterCurrentSection();
+
+      if (updateHash) {
+        const slug = tabName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        history.replaceState(null, '', '#' + slug);
+      }
+
+      closeMenus();
+      closeSidebar();
+      content.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function sectionFromHash() {
+      const hash = location.hash.replace('#', '').toLowerCase();
+      const match = Object.keys(sections).find(name =>
+        name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === hash
+      );
+      return match || 'Dashboard';
+    }
+
+    function filterCurrentSection() {
+      const input = document.getElementById('searchInput').value.trim().toLowerCase();
+      const visibleSection = document.querySelector('.page-section:not(.hidden)');
+      if (!visibleSection) return;
+
+      visibleSection.querySelectorAll('tbody tr').forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+
+    function filterOrderStatus(status) {
+      document.querySelectorAll('#ordersSection tbody tr').forEach(row => {
+        row.style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
+      });
+      filterCurrentSection();
+    }
+
+    function openActionModal(title) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('actionForm').reset();
+      const modal = document.getElementById('actionModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => document.getElementById('actionName').focus(), 50);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('actionModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast bg-gray-900 text-white rounded-lg shadow-xl px-4 py-3 text-sm flex items-center gap-3';
+      toast.innerHTML = '<i class="fa-solid fa-circle-check text-green-400"></i><span></span>';
+      toast.querySelector('span').textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3100);
+    }
+
+    function generateReport(type) {
+      showToast(type + ' report generated successfully');
+    }
+
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', event => {
+        event.preventDefault();
+        navigate(item.dataset.section);
+      });
+    });
+
+    document.getElementById('openSidebar').addEventListener('click', openSidebar);
+    document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+    window.addEventListener('resize', () => { if (window.innerWidth >= 768) closeSidebar(); });
+
+    // Header dropdowns
+    document.getElementById('notificationButton').addEventListener('click', event => {
+      event.stopPropagation();
+      const menu = document.getElementById('notificationsMenu');
+      const hidden = menu.classList.contains('hidden');
+      closeMenus('notificationsMenu');
+      if (hidden) menu.classList.remove('hidden');
+    });
+
+    document.getElementById('profileButton').addEventListener('click', event => {
+      event.stopPropagation();
+      const menu = document.getElementById('profileMenu');
+      const hidden = menu.classList.contains('hidden');
+      closeMenus('profileMenu');
+      if (hidden) menu.classList.remove('hidden');
+    });
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest('#notificationsMenu') && !event.target.closest('#notificationButton') &&
+        !event.target.closest('#profileMenu') && !event.target.closest('#profileButton')) {
+        closeMenus();
+      }
+    });
+
+    document.getElementById('markRead').addEventListener('click', () => {
+      document.getElementById('notificationBadge').classList.add('hidden');
+      closeMenus();
+      showToast('All notifications marked as read');
+    });
+
+    document.getElementById('searchInput').addEventListener('input', filterCurrentSection);
+
+    document.getElementById('orderStatusFilter').addEventListener('change', event => {
+      filterOrderStatus(event.target.value);
+    });
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('cancelModal').addEventListener('click', closeModal);
+    document.getElementById('actionModal').addEventListener('click', event => {
+      if (event.target.id === 'actionModal') closeModal();
+    });
+
+    document.getElementById('actionForm').addEventListener('submit', event => {
+      event.preventDefault();
+      closeModal();
+      showToast(document.getElementById('modalTitle').textContent + ' completed successfully');
+    });
+
+    document.getElementById('settingsForm').addEventListener('submit', event => {
+      event.preventDefault();
+      showToast('Settings saved successfully');
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeMenus();
+        closeModal();
+        closeSidebar();
+      }
+    });
+
+    window.addEventListener('hashchange', () => navigate(sectionFromHash(), false));
+
+    // Initial view
+    navigate(sectionFromHash(), false);
+  </script>
+</body>
+
+</html>
