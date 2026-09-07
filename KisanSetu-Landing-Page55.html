@@ -23,90 +23,12 @@ footer{background:#0d2419;color:#d7e6dd;padding:45px 0 20px}.foot{display:grid;g
 @media(max-width:900px){.nav-links{display:none}.actions{display:none}.menu{display:block}.hero-grid,.how{grid-template-columns:1fr}.visual{max-width:560px;width:100%;margin:auto}.features,.roles{grid-template-columns:1fr 1fr}.foot{grid-template-columns:1.5fr 1fr 1fr}}
 @media(max-width:620px){.container{width:calc(100% - 28px)}.navbar{height:65px}.hero{padding:105px 0 55px;min-height:auto}.hero p{font-size:14px}h1{font-size:42px}.visual{min-height:375px}.dashboard{height:305px}.map{height:180px}.mini{display:none}.float{transform:scale(.92)}.stats-grid{grid-template-columns:1fr 1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}.section{padding:65px 0}.head h2{font-size:29px}.features,.roles{grid-template-columns:1fr}.cta-box h2{font-size:27px}.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
 </style>
-
-<style>
-/* KisanSetu visual upgrade */
-body{background:#fff}
-.navbar{box-shadow:0 4px 24px rgba(15,73,45,.045)}
-.hero{
-  background:
-    radial-gradient(circle at 78% 22%,rgba(70,190,123,.22),transparent 27%),
-    radial-gradient(circle at 15% 78%,rgba(33,150,93,.08),transparent 24%),
-    linear-gradient(135deg,#f9fdfb 0%,#edf8f1 100%);
-}
-.hero:after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
-  background-image:linear-gradient(rgba(33,150,93,.045) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(33,150,93,.045) 1px,transparent 1px);
-  background-size:42px 42px;
-  mask-image:linear-gradient(to bottom,black,transparent 82%);
-}
-.hero-grid{z-index:2}
-.eyebrow{box-shadow:0 7px 20px rgba(33,150,93,.08)}
-.hero-login{padding-left:23px!important;padding-right:23px!important}
-.btn{position:relative;overflow:hidden}
-.btn:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.25) 50%,transparent 75%);
-  transform:translateX(-130%);transition:.55s;
-}
-.btn:hover:after{transform:translateX(130%)}
-.visual:before,.visual:after{
-  content:"";position:absolute;border-radius:50%;filter:blur(1px);pointer-events:none
-}
-.visual:before{width:95px;height:95px;background:#8bd7aa55;right:-15px;top:-15px}
-.visual:after{width:65px;height:65px;background:#21965d22;left:-15px;top:100px}
-.dashboard{box-shadow:0 28px 65px rgba(18,72,45,.14);border-color:#cfe4d6}
-.dashboard:after{
-  content:"";position:absolute;left:0;right:0;top:54px;height:1px;
-  background:linear-gradient(90deg,transparent,#21965d55,transparent)
-}
-.map:after{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 25% 70%,#fff7 0 2px,transparent 3px),
-             radial-gradient(circle at 75% 25%,#fff7 0 2px,transparent 3px);
-  background-size:95px 70px,120px 90px;opacity:.55
-}
-.pin{z-index:2}
-.route{z-index:1}
-.float{backdrop-filter:blur(8px);background:rgba(255,255,255,.96)}
-.stats{background:#fff}
-.stat strong{font-weight:900}
-.feature,.role{
-  box-shadow:0 5px 20px rgba(18,72,45,.025);
-}
-.feature:hover,.role:hover{
-  box-shadow:0 18px 40px rgba(18,72,45,.09);
-}
-.icon{font-weight:900;font-size:19px}
-.flow{position:relative;overflow:hidden}
-.flow:before{
-  content:"";position:absolute;width:220px;height:220px;border-radius:50%;
-  right:-90px;bottom:-120px;background:#fff1;
-}
-.box{transition:.2s}
-.box:hover{background:#ffffff20;transform:translateX(3px)}
-.role{transition:.2s}
-.cta-box{box-shadow:0 18px 45px rgba(18,72,45,.055);overflow:hidden}
-.cta-box:before{
-  content:"";position:absolute;width:340px;height:340px;border-radius:50%;
-  left:-180px;bottom:-230px;background:#21965d10;
-}
-@keyframes floatUp{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-.dashboard{animation:floatUp 6s ease-in-out infinite}
-@keyframes pulseSoft{0%,100%{box-shadow:0 0 0 0 rgba(33,150,93,.18)}50%{box-shadow:0 0 0 9px rgba(33,150,93,0)}}
-.dot{animation:pulseSoft 2s infinite}
-@media(max-width:620px){
-  .dashboard{animation:none}
-}
-</style>
-
 </head>
 <body>
 <header class="navbar"><div class="container nav-inner">
 <a href="#home" class="brand"><div class="mark">🌱</div><b>Kisan<span>Setu</span></b></a>
 <nav class="nav-links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#roles">For everyone</a><a href="#contact">Contact</a></nav>
-<div class="actions"><a class="btn primary" href="index.html">Login / Get Started →</a></div>
+<div class="actions"><a class="btn outline" href="buyer-dashboard.html">Buyer Login</a><a class="btn primary" href="Farmer-Dashboard.html">Farmer Login</a></div>
 <button class="menu" id="menu">☰</button></div></header>
 
 <main id="home">
@@ -114,7 +36,7 @@ body{background:#fff}
 <div class="eyebrow"><i class="dot"></i> SMART AGRICULTURE • DIGITAL MARKETPLACE</div>
 <h1>From the <span>farm</span> to the right market.</h1>
 <p>KisanSetu brings farmers, buyers and logistics together on one simple platform — helping farmers find better opportunities, helping buyers source produce, and making pickup smarter.</p>
-<div class="hero-buttons"><a class="btn primary hero-login" href="index.html">Login to KisanSetu →</a><a class="btn outline" href="#features">Explore Platform ↓</a></div>
+<div class="hero-buttons"><a class="btn primary" href="Farmer-Dashboard.html">I'm a Farmer →</a><a class="btn outline" href="buyer-dashboard.html">I'm a Buyer →</a></div>
 <div class="trust"><span>Direct farmer connection</span><span>Smart pickup planning</span><span>Market visibility</span></div>
 </div>
 <div class="visual"><div class="dashboard">
@@ -143,15 +65,15 @@ body{background:#fff}
 
 <section class="section gray" id="roles"><div class="container"><div class="head"><div class="kicker">Built for the ecosystem</div><h2>One platform. Three connected experiences.</h2><p>Each user gets the tools relevant to their role while staying connected to the same supply chain.</p></div>
 <div class="roles">
-<article class="role"><div class="tag">For farmers</div><h3>Sell with more visibility.</h3><p>Manage your produce and orders while getting access to buyers and useful farming insights.</p><ul><li>Manage produce listings</li><li>View buyer orders</li><li>Track pickups</li><li>Get AI-powered insights</li></ul><a class="btn primary" href="index.html">Login as Farmer →</a></article>
-<article class="role"><div class="tag">For buyers</div><h3>Source produce easily.</h3><p>Discover available produce, connect with farmers and manage procurement in one place.</p><ul><li>Browse marketplace</li><li>Place and track orders</li><li>Save produce</li><li>Manage procurement</li></ul><a class="btn primary" href="index.html">Login as Buyer →</a></article>
-<article class="role"><div class="tag">For administrators</div><h3>See the whole network.</h3><p>Monitor users, orders, listings and logistics from a central administrative dashboard.</p><ul><li>Monitor platform activity</li><li>Manage users and listings</li><li>Track orders and logistics</li><li>View reports</li></ul><a class="btn outline" href="index.html">Login to Platform →</a></article>
+<article class="role"><div class="tag">For farmers</div><h3>Sell with more visibility.</h3><p>Manage your produce and orders while getting access to buyers and useful farming insights.</p><ul><li>Manage produce listings</li><li>View buyer orders</li><li>Track pickups</li><li>Get AI-powered insights</li></ul><a class="btn primary" href="Farmer-Dashboard.html">Open Farmer Dashboard →</a></article>
+<article class="role"><div class="tag">For buyers</div><h3>Source produce easily.</h3><p>Discover available produce, connect with farmers and manage procurement in one place.</p><ul><li>Browse marketplace</li><li>Place and track orders</li><li>Save produce</li><li>Manage procurement</li></ul><a class="btn primary" href="buyer-dashboard.html">Open Buyer Dashboard →</a></article>
+<article class="role"><div class="tag">For administrators</div><h3>See the whole network.</h3><p>Monitor users, orders, listings and logistics from a central administrative dashboard.</p><ul><li>Monitor platform activity</li><li>Manage users and listings</li><li>Track orders and logistics</li><li>View reports</li></ul><a class="btn outline" href="KisanSetu_Admin.html">Open Admin Dashboard →</a></article>
 </div></div></section>
 
-<section class="cta" id="contact"><div class="container"><div class="cta-box"><div class="kicker">Ready to connect?</div><h2>Let's build a stronger farm-to-market journey.</h2><p>Choose your role and experience the KisanSetu prototype.</p><div class="cta-buttons"><a class="btn primary" href="index.html">Login / Get Started →</a></div></div></div></section>
+<section class="cta" id="contact"><div class="container"><div class="cta-box"><div class="kicker">Ready to connect?</div><h2>Let's build a stronger farm-to-market journey.</h2><p>Choose your role and experience the KisanSetu prototype.</p><div class="cta-buttons"><a class="btn primary" href="Farmer-Dashboard.html">Continue as Farmer</a><a class="btn outline" href="buyer-dashboard.html">Continue as Buyer</a></div></div></div></section>
 </main>
 
-<footer><div class="container"><div class="foot"><div><a class="brand" href="#home"><div class="mark">🌱</div><b style="color:#fff">Kisan<span>Setu</span></b></a><p class="about">A smart digital platform connecting farmers, buyers and logistics for a more transparent agricultural supply chain.</p></div><div class="col"><h4>Platform</h4><a href="#features">Features</a><a href="#how">How it works</a><a href="#roles">For everyone</a></div><div class="col"><h4>Dashboards</h4><a href="index.html">Farmer</a><a href="index.html">Buyer</a><a href="index.html">Admin</a></div><div class="col"><h4>Explore</h4><a href="#home">Home</a><a href="#features">Solutions</a><a href="#contact">Get started</a></div></div><div class="copy">© 2026 KisanSetu • Stronger Farmers, Brighter Tomorrow</div></div></footer>
+<footer><div class="container"><div class="foot"><div><a class="brand" href="#home"><div class="mark">🌱</div><b style="color:#fff">Kisan<span>Setu</span></b></a><p class="about">A smart digital platform connecting farmers, buyers and logistics for a more transparent agricultural supply chain.</p></div><div class="col"><h4>Platform</h4><a href="#features">Features</a><a href="#how">How it works</a><a href="#roles">For everyone</a></div><div class="col"><h4>Dashboards</h4><a href="Farmer-Dashboard.html">Farmer</a><a href="buyer-dashboard.html">Buyer</a><a href="KisanSetu_Admin.html">Admin</a></div><div class="col"><h4>Explore</h4><a href="#home">Home</a><a href="#features">Solutions</a><a href="#contact">Get started</a></div></div><div class="copy">© 2026 KisanSetu • Stronger Farmers, Brighter Tomorrow</div></div></footer>
 
 <script>
 const menu=document.getElementById("menu"),links=document.querySelector(".nav-links");
